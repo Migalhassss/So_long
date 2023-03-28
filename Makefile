@@ -6,7 +6,7 @@
 #    By: micarrel <micarrel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/22 10:00:35 by micarrel          #+#    #+#              #
-#    Updated: 2023/03/22 13:30:30 by micarrel         ###   ########.fr        #
+#    Updated: 2023/03/28 14:53:27 by micarrel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,10 +14,16 @@ NAME    	= so_long
 
 CFLAGS  	= -Wall -Werror -Wextra -O3 -g
 INCLUDE 	= -I include
+
 LIBFTDIR	= ./libft
 LIBFT   	= $(LIBFTDIR)/libft.a
+
 LIBMLXDIR 	= ./minilibx-linux
 LIBMLX  	= $(LIBMLXDIR)/libmlx_Linux.a
+
+PRINTFDIR	= ./ft_printf
+PRINTFDIR	= $(PRINTFDIR)/libftprintf.a
+
 LFLAGS  	= -L$(LIBMLXDIR) -lmlx -L${LIBFTDIR} -lft
 UNAME   	:= $(shell uname)
 ifeq ($(UNAME), Darwin)
@@ -35,12 +41,13 @@ SRC_DIR 	= mainfiles
 SRC     	= $(wildcard $(SRC_DIR)/*.c)
 OBJ     	= $(SRC:%.c=%.o)
 
-all: 		$(NAME)
+all:	$(NAME)
 
 $(NAME):	$(OBJ)
+			make -s -C $(PRINTF)
 			make -s -C $(LIBFTDIR)
 			make -s -C $(LIBMLXDIR)
-			$(CC) $(FLAGS) $(OBJ) $(INCLUDE) $(LIBFT) $(LIBMLX) $(LFLAGS) -o $(NAME)
+			$(CC) $(FLAGS) $(OBJ) $(INCLUDE) $(LIBFT) $(PRINTF) $(LIBMLX) $(LFLAGS) -o $(NAME)
 
 clean :
 			@make clean -s -C $(LIBFTDIR)
@@ -49,6 +56,7 @@ clean :
 
 fclean:		clean
 			rm -rf $(LIBFT)
+			rm -rf $(PRINTF)
 			rm -rf $(NAME)
 
 re:
