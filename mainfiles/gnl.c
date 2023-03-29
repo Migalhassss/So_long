@@ -6,13 +6,13 @@
 /*   By: micarrel <micarrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 13:29:01 by micarrel          #+#    #+#             */
-/*   Updated: 2023/03/28 13:32:15 by micarrel         ###   ########.fr       */
+/*   Updated: 2023/03/29 13:43:54 by micarrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	ft_line_length(int fd)
+int	ft_line(int fd)
 {
 	char	buffer;
 	int		length;
@@ -32,7 +32,7 @@ int	ft_line_length(int fd)
 	return (length);
 }
 
-int	ft_count_lines(int fd)
+int	ft_count_line(int fd)
 {
 	int		linecount;
 	char	buffer;

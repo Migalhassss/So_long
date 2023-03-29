@@ -6,7 +6,7 @@
 /*   By: micarrel <micarrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 11:33:19 by micarrel          #+#    #+#             */
-/*   Updated: 2023/03/28 12:25:07 by micarrel         ###   ########.fr       */
+/*   Updated: 2023/03/29 14:50:37 by micarrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,11 @@ t_block	witch_block(char name)
 	t_block	map[6];
 	int i;
 
-	map[0] = (t_block){"0", "../img/grass.xpm"};
-	map[1] = (t_block){"1", "../img/water.xpm"};
-	map[2] = (t_block){"C", "../img/plants.xpm"};
-	map[3] = (t_block){"P", "../img/down.xpm"};
-	map[4] = (t_block){"E", "../img/exit.xpm"};
+	map[0] = (t_block){"0", "./img/floor.xpm"};
+	map[1] = (t_block){"1", "./img/water.xpm"};
+	map[2] = (t_block){"C", "./img/plant.xpm"};
+	map[3] = (t_block){"P", "./img/down.xpm"};
+	map[4] = (t_block){"E", "./img/exit.xpm"};
 	map[5] = (t_block){NULL, NULL};
 	i = 0;
 	while (map[i].name != NULL)
@@ -41,5 +41,5 @@ t_block	witch_block(char name)
 		}
 		i++;
 	}
-	return (map[i]);
+	return (map[5]);
 }

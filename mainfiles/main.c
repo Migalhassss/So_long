@@ -15,21 +15,21 @@
 void	ft_error(char *msg, t_game *game)
 {
 	ft_printf("%s", msg);
-	map_destroy(game);
+	destroy_map(game);
 	exit(0);
 }
 
 int	check_key(int keycode, t_game *game)
 {
-	if (keycode == ESC)
-		destroy_window(game);
-	if (keycode == UP)
+	if (keycode == 65307)
+		window_destroy(game);
+	if (keycode == 119)
 		ft_up(game);
-	if (keycode == LEFT)
+	if (keycode == 97)
 		ft_left(game);
-	if (keycode == RIGHT)
+	if (keycode == 100)
 		ft_right(game);
-	if (keycode == DOWN)
+	if (keycode == 115)
 		ft_down(game);
 	return (0);
 }
@@ -57,21 +57,28 @@ void	check_ber_file(char *str)
 	exit(0);
 }
 
+
+void	ft_hook(t_game *game)
+{
+	mlx_hook(game->window, 2, 1L, check_key, game);
+	mlx_hook(game->window, 17, 1L, window_destroy, game);
+	mlx_loop(game->mlx);
+}
+
 int main(int ac, char **av)
 {
 	t_game	game;
 
 	if (ac != 2)
 	 	return (0);
-	
-	check_ber_file(av[1]);
 	ft_window_size(&game, av);
 	game.mlx = mlx_init();
 	game.window = mlx_new_window(game.mlx, game.size_x, game.size_y, "so_long");
 	start(&game);
 	create_mapline(&game, av);
 	control_game(&game);
- 	mlx_hook(game.window, 17, 1L << 2, window_destroy, &game);
-	mlx_key_hook(game.window, check_key, &game);
-	mlx_loop(game.mlx);
+	ft_hook(&game);
+ 	// mlx_hook(game.window, 17, 1L << 2, check_key, &game);
+	// mlx_key_hook(game.window, check_key, &game);
+	// mlx_loop(game.mlx);
 }

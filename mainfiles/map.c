@@ -26,7 +26,7 @@ void	map_create(t_game *game, int i)
 		{
 			map = witch_block(game->map[i][j]);
 			image.path = map.path;
-			put_img(image, (j * 48), (i * 48));
+			put_img(image, (j * 64), (i * 64));
 			j++;
 		}
 		i++;
@@ -36,23 +36,23 @@ void	map_create(t_game *game, int i)
 void	floor_create(t_game game, int i)
 {
 	int		j;
-	t_image	image;
+	t_image	img;
 
-	image.wlx = game;
+	img.wlx = game;
 	j = 0;
-	if (ft_strlen(game.map[i]) != game.size_x / 48 && i != (game.size_y / 48))
+	if (ft_strlen(game.map[i]) != game.size_x / 64 && i != (game.size_y / 64))
 		ft_error("Error\n", &game);
-	if (game.map[(game.size_y / 48)] && game.map[(game.size_y / 48)][0] != '\0')
+	if (game.map[(game.size_y / 64)] && game.map[(game.size_y / 64)][0] != '\0')
 		ft_error("Error\n", &game);
 	while (game.map[i])
 	{
-		j = 0;
+		j = 0; 	
 		while ((game.map[i][j]))
 		{
 			if (!ft_strchr("1PCE0", game.map[i][j]))
 				ft_error("Error\n", &game);
-			image.path = "../img/grass.xpm";
-			put_img(image, (j * 48), (i * 48));
+			img.path = "./img/floor.xpm";
+			put_img(img, (j * 64), (i * 64));
 			j++;
 		}
 		i++;
@@ -62,10 +62,8 @@ void	floor_create(t_game game, int i)
 void	create_maplenght(char *area, t_game *game, int i)
 {
 	int		j;
-	t_image	image;
 
 	j = 0;
-	image.wlx = *game; 
 	game->map[i] = (char *)malloc(sizeof(char) * (10000));
 	while (area[j] != '\0')
 	{
@@ -87,7 +85,7 @@ void	create_mapline(t_game *game, char **av)
 	i = 0;
 	game->map = (char **)malloc(sizeof(char *) * (10000));
 	fd = open(av[1], O_RDONLY);
-	while (i <= game->size_y / 48)
+	while (i <= game->size_y / 64)
 	{
 		area = get_next_line(fd);
 		if (area == NULL)
