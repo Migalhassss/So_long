@@ -79,8 +79,6 @@ int		check_move(t_game *game, int i, int j);
 int		ft_line(int fd);
 int		ft_count_line(int fd);
 void	*myfree(void *str);
-char	*get_next_line(int fd);
-
 /*--------------------------------------------*/
 
 
@@ -100,7 +98,7 @@ void	ft_right(t_game *game);
 
 
 /*-------------------Map.c--------------------*/
-void	map_create(t_game *game, int i);
+void	map_create(t_game game, int i);
 void	floor_create(t_game game, int i);
 void	create_maplenght(char *area, t_game *game, int i);
 void	create_mapline(t_game *game, char **av);

@@ -6,7 +6,7 @@
 /*   By: micarrel <micarrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 10:00:30 by micarrel          #+#    #+#             */
-/*   Updated: 2023/03/29 16:02:46 by micarrel         ###   ########.fr       */
+/*   Updated: 2023/04/05 16:12:01 by micarrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 void	update(t_game *game, int x, int y)
 {
 	t_image img;
+	
 	img.path = "./img/floor.xpm";
 	img.wlx = *game;
 	put_img(img, game->player.x, game->player.y);

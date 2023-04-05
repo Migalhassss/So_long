@@ -6,13 +6,13 @@
 #    By: micarrel <micarrel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/22 10:00:35 by micarrel          #+#    #+#              #
-#    Updated: 2023/03/29 16:37:35 by micarrel         ###   ########.fr        #
+#    Updated: 2023/04/05 12:04:57 by micarrel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME    	= so_long
 
-CFLAGS  	= -Wall -Werror -Wextra -O3 -g 
+CFLAGS  	= -Wall -Werror -Wextra -O3 -g
 INCLUDE 	= -I include
 
 LIBFTDIR	= ./libft

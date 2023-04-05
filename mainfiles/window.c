@@ -27,7 +27,12 @@ void	ft_window_size(t_game *data, char **av)
 
 int window_destroy(t_game *game)
 {
+	// t_image img;
+
+	// img.wlx = *game;
+	// mlx_destroy_image(game->mlx, img.path);
 	mlx_destroy_window(game->mlx, game->window);
+	mlx_destroy_display(game->mlx);
 	destroy_map(game);
 	exit(0);
 }

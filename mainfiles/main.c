@@ -43,28 +43,6 @@ void	start(t_game *game)
 	game->playercheck = 0;
 }
 
-void	check_ber_file(char *str)
-{
-	int	i;
-	
-	i = 0;
-	while (str[i])
-	{
-		if (str[i] == '.' && ft_strcmp(str, ".ber") == 0)
-			return ;
-		i++;
-	}
-	exit(0);
-}
-
-
-void	ft_hook(t_game *game)
-{
-	mlx_hook(game->window, 2, 1L, check_key, game);
-	mlx_hook(game->window, 17, 1L, window_destroy, game);
-	mlx_loop(game->mlx);
-}
-
 int main(int ac, char **av)
 {
 	t_game	game;
@@ -77,8 +55,7 @@ int main(int ac, char **av)
 	start(&game);
 	create_mapline(&game, av);
 	control_game(&game);
-	ft_hook(&game);
- 	// mlx_hook(game.window, 17, 1L << 2, check_key, &game);
-	// mlx_key_hook(game.window, check_key, &game);
-	// mlx_loop(game.mlx);
+	mlx_hook(game.window, 2, 1L, check_key, &game);
+	mlx_hook(game.window, 17, 1L, window_destroy, &game);
+	mlx_loop(game.mlx);
 }
