@@ -6,7 +6,7 @@
 /*   By: micarrel <micarrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 10:00:30 by micarrel          #+#    #+#             */
-/*   Updated: 2023/04/05 16:12:01 by micarrel         ###   ########.fr       */
+/*   Updated: 2023/04/17 15:52:56 by micarrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ void	update(t_game *game, int x, int y)
 	
 	img.path = "./img/floor.xpm";
 	img.wlx = *game;
-	put_img(img, game->player.x, game->player.y);
-	put_img(img, x, y);
+	put_img(game, img, game->player.x, game->player.y);
+	put_img(game, img, x, y);
 }
 
 void	ft_up(t_game *game)
@@ -38,7 +38,8 @@ void	ft_up(t_game *game)
 		update(game, j, i);
 		game->player.y = i;
 		game->player.x = j;
-		put_img(img, j, i);
+		put_img(game, img, j, i);
+		ft_printf("Moves: %d\n", game->player.move);
 	}
 }
 
@@ -58,7 +59,8 @@ void	ft_down(t_game *game)
 		update(game, j, i);
 		game->player.y = i;
 		game->player.x = j;
-		put_img(img, j, i);
+		put_img(game, img, j, i);
+		ft_printf("Moves: %d\n", game->player.move);
 	}
 }
 
@@ -78,7 +80,8 @@ void	ft_left(t_game *game)
 		update(game, j, i);
 		game->player.y = i;
 		game->player.x = j;
-		put_img(img, j, i);
+		put_img(game, img, j, i);
+		ft_printf("Moves: %d\n", game->player.move);
 	}
 }
 
@@ -98,6 +101,7 @@ void	ft_right(t_game *game)
 		update(game, j, i);
 		game->player.y = i;
 		game->player.x = j;
-		put_img(img, j, i);
+		put_img(game, img, j, i);
+		ft_printf("Moves: %d\n", game->player.move);
 	}
 }

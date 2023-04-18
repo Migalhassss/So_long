@@ -16,7 +16,7 @@ void	ft_error(char *msg, t_game *game)
 {
 	ft_printf("%s", msg);
 	destroy_map(game);
-	exit(0);
+	exit(1);
 }
 
 int	check_key(int keycode, t_game *game)

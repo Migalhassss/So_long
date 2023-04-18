@@ -48,6 +48,7 @@ typedef struct s_game
 	size_t		size_x;
 	int			size_y;
 	t_player	player;
+
 }				t_game;
 
 typedef struct s_image
@@ -71,6 +72,7 @@ void	control_map(t_game *game);
 void	control_wall(t_game *game);
 void	control_game(t_game *game);
 int		check_move(t_game *game, int i, int j);
+void	flood_fill(int x, int y, int *flag, char **tab);
 
 /*--------------------------------------------*/
 
@@ -78,12 +80,13 @@ int		check_move(t_game *game, int i, int j);
 /*-------------------Gnl.c--------------------*/
 int		ft_line(int fd);
 int		ft_count_line(int fd);
+
 void	*myfree(void *str);
 /*--------------------------------------------*/
 
 
 /*-------------------Img.c--------------------*/
-void	*put_img(t_image image, int x, int y);
+void	*put_img(t_game *game, t_image image, int x, int y);
 t_block	witch_block(char name);
 
 /*--------------------------------------------*/
@@ -98,8 +101,8 @@ void	ft_right(t_game *game);
 
 
 /*-------------------Map.c--------------------*/
-void	map_create(t_game game, int i);
-void	floor_create(t_game game, int i);
+void	map_create(t_game *game, int i);
+void	floor_create(t_game *game, int i);
 void	create_maplenght(char *area, t_game *game, int i);
 void	create_mapline(t_game *game, char **av);
 

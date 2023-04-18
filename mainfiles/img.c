@@ -6,17 +6,20 @@
 /*   By: micarrel <micarrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 11:33:19 by micarrel          #+#    #+#             */
-/*   Updated: 2023/04/05 16:19:15 by micarrel         ###   ########.fr       */
+/*   Updated: 2023/04/17 11:34:44 by micarrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	*put_img(t_image image, int x, int y)
+void	*put_img(t_game *game,t_image image, int x, int y)
 {
 	image.img = mlx_xpm_file_to_image(image.wlx.mlx,
 		image.path, &image.img_width, &image.img_heigth);
+	if (!image.img)
+		ft_error("Error xpm_file", game);
 	mlx_put_image_to_window(image.wlx.mlx, image.wlx.window, image.img, x, y);
+	mlx_destroy_image(image.wlx.mlx, image.img);
 	return (image.img);
 }
 
@@ -43,3 +46,4 @@ t_block	witch_block(char name)
 	}
 	return (map[5]);
 }
+
