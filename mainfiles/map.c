@@ -41,16 +41,16 @@ void	floor_create(t_game *game, int i)
 	img.wlx = *game;
 	j = 0;
 	if (ft_strlen(game->map[i]) != game->size_x / 64 && i != (game->size_y / 64))
-		ft_error("O mapa não é retangular\n", game);
+		ft_error_map("O mapa não é retangular\n", game);
 	if (game->map[(game->size_y / 64)] && game->map[(game->size_y / 64)][0] != '\0')
-		ft_error("Mapa errado\n", game);
+		ft_error_map("Mapa errado\n", game);
 	while (game->map[i])
 	{
 		j = 0;
 		while ((game->map[i][j]))
 		{
 			if (!ft_strchr("1PCE0", game->map[i][j]))
-				ft_error("Error\n", game);
+				ft_error_map("Error\n", game);
 			img.path = "./img/floor.xpm";
 			put_img(game ,img, (j * 64), (i * 64));
 			j++;
@@ -75,6 +75,7 @@ void	create_maplenght(char *area, t_game *game, int i)
 		j++;
 	}
 	game->map[i][j] = '\0';
+	free(area);
 	floor_create(game, i);
 	map_create(game, i);
 }
@@ -105,4 +106,6 @@ void	create_mapline(t_game *game, char **av)
 		i++;
 	}
 	close(fd);
+	if (game->error > 0)
+		window_destroy(game);
 }

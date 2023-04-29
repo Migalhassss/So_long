@@ -12,10 +12,16 @@
 
 #include "so_long.h"
 
+void	ft_error_map(char *msg, t_game *game)
+{
+	ft_printf("%s", msg);
+	game->error++;
+}
+
 void	ft_error(char *msg, t_game *game)
 {
 	ft_printf("%s", msg);
-	destroy_map(game);
+	window_destroy(game);
 	exit(1);
 }
 
@@ -36,6 +42,7 @@ int	check_key(int keycode, t_game *game)
 
 void	start(t_game *game)
 {
+	game->error = 0;
 	game->coincheck = 0;
 	game->exitcheck = 0;
 	game->player.coin = 0;

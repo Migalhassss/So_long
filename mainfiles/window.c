@@ -23,6 +23,11 @@ void	ft_window_size(t_game *data, char **av)
 		ft_error("Error\n", data);
 	data->size_x = (ft_line(fd) * 64);
 	data->size_y = ft_count_line(fd) * 64;
+	if (data->size_x == 0 || data->size_y == 0)
+	{
+		ft_printf("Mapa vazio\n");
+		exit(1);
+	}
 }
 
 int window_destroy(t_game *game)

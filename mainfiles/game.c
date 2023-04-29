@@ -22,6 +22,7 @@ void	destroy_map(t_game *game)
 		free(game->map[i]);
 		i++;
 	}
+	free(game->map);
 }
 
 void	control_map(t_game *game)
@@ -41,7 +42,7 @@ void	control_map(t_game *game)
 		}
 		i++;
 	}
-	if (game->exitcheck == 0)
+	if (game->exitcheck != 1)
 		ft_error("Error\n", game);
 	if (game->coincheck == 0)
 		ft_error("Error\n", game);
@@ -74,12 +75,12 @@ void	control_wall(t_game *game)
 
 void	flood_fill(int x, int y, int *flag, char **tab)
 {
-	if (tab[y][x] == '1' || tab[y][x] == 'P')
+	if (tab[y][x] == '1' || tab[y][x] == 'P' || tab[y][x] == 'D')
 		return ;
 	else if(tab[y][x] == '0')
 		tab[y][x] = 'P';
 	else if (tab[y][x] == 'C')
-		tab[y][x] = 'C';
+		tab[y][x] = 'D';
 	else if (tab[y][x] == 'E')
 	{
 		(*flag)++;
@@ -118,10 +119,13 @@ void	control_game(t_game *game)
 	control_map(game);
 	control_wall(game);
 	k = 0;
-	flood_fill(game->player.x / 64 + 1 , game->player.y / 64, &k, game->map);
-	flood_fill(game->player.x / 64 - 1, game->player.y / 64, &k, game->map);
-	flood_fill(game->player.x / 64, game->player.y / 64 - 1, &k, game->map);
-	flood_fill(game->player.x / 64, game->player.y / 64 + 1, &k, game->map);
+	int x = game->player.x;
+	int y = game->player.y;
+	char **tab = game->map;
+	flood_fill(x / 64 + 1 , y / 64, &k, tab);
+	flood_fill(x / 64 - 1, y / 64, &k, tab);
+	flood_fill(x / 64, y / 64 - 1, &k, tab);
+	flood_fill(x / 64, y / 64 + 1, &k, tab);
 	if (k == 0)
 		ft_error("Exit Error", game);
 }
@@ -130,7 +134,7 @@ int	check_move(t_game *game, int i, int j)
 {
 	if (game->map[i][j] == '1')
 		return (1);
-	else if (game->map[i][j] == 'C')
+	else if (game->map[i][j] == 'C' || game->map[i][j] == 'D')
 	{
 		game->player.coin++;
 		game->map[i][j] = '0';

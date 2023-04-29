@@ -45,6 +45,7 @@ typedef struct s_game
 	int			coincheck;
 	int			playercheck;
 	int			exitcheck;
+	int			error;
 	size_t		size_x;
 	int			size_y;
 	t_player	player;
@@ -117,6 +118,7 @@ int		window_destroy(t_game *game);
 
 
 /*-------------------Main.c-------------------*/
+void	ft_error_map(char *msg, t_game *game);
 void	ft_error(char *msg, t_game *game);
 void	start(t_game *game);
 void	check_ber_file(char *str);
