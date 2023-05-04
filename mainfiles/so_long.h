@@ -54,7 +54,7 @@ typedef struct s_game
 
 typedef struct s_image
 {
-	struct	s_game	wlx;
+	struct s_game	wlx;
 	char			*path;
 	void			*img;
 	int				img_width;
@@ -77,7 +77,6 @@ void	flood_fill(int x, int y, int *flag, char **tab);
 
 /*--------------------------------------------*/
 
-
 /*-------------------Gnl.c--------------------*/
 int		ft_line(int fd);
 int		ft_count_line(int fd);
@@ -85,13 +84,11 @@ int		ft_count_line(int fd);
 void	*myfree(void *str);
 /*--------------------------------------------*/
 
-
 /*-------------------Img.c--------------------*/
 void	*put_img(t_game *game, t_image image, int x, int y);
 t_block	witch_block(char name);
 
 /*--------------------------------------------*/
-
 
 /*-------------------Moves.c-------------------*/
 void	update(t_game *game, int x, int y);
@@ -99,7 +96,6 @@ void	ft_up(t_game *game);
 void	ft_down(t_game *game);
 void	ft_left(t_game *game);
 void	ft_right(t_game *game);
-
 
 /*-------------------Map.c--------------------*/
 void	map_create(t_game *game, int i);
@@ -109,14 +105,15 @@ void	create_mapline(t_game *game, char **av);
 
 /*--------------------------------------------*/
 
-
 /*-------------------Window.c-----------------*/
 void	ft_window_size(t_game *data, char **av);
 int		window_destroy(t_game *game);
+void	flood_fill(int x, int y, int *flag, char **tab);
+void	flood_fill_C(int x, int y, int *flag, char **tab);
+void	fill_flood(t_game *game);
 
 /*--------------------------------------------*/
-
-
+char	*get_next_line(int fd);
 /*-------------------Main.c-------------------*/
 void	ft_error_map(char *msg, t_game *game);
 void	ft_error(char *msg, t_game *game);

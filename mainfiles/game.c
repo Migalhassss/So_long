@@ -6,7 +6,7 @@
 /*   By: micarrel <micarrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 13:39:05 by micarrel          #+#    #+#             */
-/*   Updated: 2023/04/18 09:39:20 by micarrel         ###   ########.fr       */
+/*   Updated: 2023/05/04 11:03:52 by micarrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,11 @@ void	control_map(t_game *game)
 		i++;
 	}
 	if (game->exitcheck != 1)
-		ft_error("Error\n", game);
+		ft_error("Error Exit check\n", game);
 	if (game->coincheck == 0)
-		ft_error("Error\n", game);
+		ft_error("Error Coin check\n", game);
 	if (game->playercheck != 1)
-		ft_error("Error\n", game);
+		ft_error("Error Player check\n", game);
 }
 
 void	control_wall(t_game *game)
@@ -62,41 +62,22 @@ void	control_wall(t_game *game)
 		while (x < (game->size_x / 64))
 		{
 			if ((y == 0 || x == 0) && game->map[y][x] != '1')
-				ft_error("Error\n", game);
+				ft_error("Error Wall\n", game);
 			else if ((y == (game->size_y / 64 - 1)
 					|| x == (game->size_x / 64 - 1))
 				&& game->map[y][x] != '1')
-				ft_error("Error\n", game);
+				ft_error("Error Wall\n", game);
 			x++;
 		}
 		y++;
 	}
 }
 
-void	flood_fill(int x, int y, int *flag, char **tab)
-{
-	if (tab[y][x] == '1' || tab[y][x] == 'P' || tab[y][x] == 'D')
-		return ;
-	else if(tab[y][x] == '0')
-		tab[y][x] = 'P';
-	else if (tab[y][x] == 'C')
-		tab[y][x] = 'D';
-	else if (tab[y][x] == 'E')
-	{
-		(*flag)++;
-		tab[y][x] = 'E';
-	}
-	flood_fill(x + 1, y, flag, tab);
-	flood_fill(x - 1, y, flag, tab);
-	flood_fill(x, y + 1, flag, tab);
-	flood_fill(x, y - 1, flag, tab);
-}
-
 void	control_game(t_game *game)
 {
 	int	j;
 	int	i;
-	int	k;
+
 	i = 0;
 	j = 0;
 	while (game->map[i])
@@ -118,16 +99,7 @@ void	control_game(t_game *game)
 	}
 	control_map(game);
 	control_wall(game);
-	k = 0;
-	int x = game->player.x;
-	int y = game->player.y;
-	char **tab = game->map;
-	flood_fill(x / 64 + 1 , y / 64, &k, tab);
-	flood_fill(x / 64 - 1, y / 64, &k, tab);
-	flood_fill(x / 64, y / 64 - 1, &k, tab);
-	flood_fill(x / 64, y / 64 + 1, &k, tab);
-	if (k == 0)
-		ft_error("Exit Error", game);
+	fill_flood(game);
 }
 
 int	check_move(t_game *game, int i, int j)

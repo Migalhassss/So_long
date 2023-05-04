@@ -6,7 +6,7 @@
 /*   By: micarrel <micarrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 13:29:01 by micarrel          #+#    #+#             */
-/*   Updated: 2023/04/17 16:02:31 by micarrel         ###   ########.fr       */
+/*   Updated: 2023/05/04 17:23:04 by micarrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ int	ft_count_line(int fd)
 		if (buffer == '\n')
 			linecount++;
 	}
+	if (buffer == '1')
+		linecount++;
 	return (linecount);
 }
 
@@ -57,30 +59,30 @@ void	*myfree(void *str)
 	return (NULL);
 }
 
-// char	*get_next_line(int fd, t_game game)
-// {
-// 	char	buffer;
-// 	char	*line;
-// 	int		rd_byte;
-// 	int		i;
+char	*get_next_line(int fd)
+{
+	char	buffer;
+	char	*line;
+	int		rd_byte;
+	int		i;
 
-// 	rd_byte = 1;
-// 	i = 0;
-// 	line = (char *)malloc(sizeof(char) * (game.size_x + game.size_y) + 1);
-// 	buffer = 0;
-// 	if (fd < 0)
-// 		return (NULL);
-// 	while (rd_byte > 0)
-// 	{
-// 		rd_byte = read(fd, &buffer, 1);
-// 		if (rd_byte <= 0)
-// 			break ;
-// 		line[i++] = buffer;
-// 		if (buffer == '\n')
-// 			break ;
-// 	}
-// 	line[i] = '\0';
-// 	if (!*line)
-// 		myfree(line);
-// 	return (line);
-// }
+	rd_byte = 1;
+	i = 0;
+	line = (char *)malloc(sizeof(char) * (9999));
+	buffer = 0;
+	if (fd < 0)
+		return (NULL);
+	while (rd_byte > 0)
+	{
+		rd_byte = read(fd, &buffer, 1);
+		if (rd_byte <= 0)
+			break ;
+		line[i++] = buffer;
+		if (buffer == '\n')
+			break ;
+	}
+	line[i] = '\0';
+	if (!*line)
+		myfree(line);
+	return (line);
+}

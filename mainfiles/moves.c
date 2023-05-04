@@ -6,7 +6,7 @@
 /*   By: micarrel <micarrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 10:00:30 by micarrel          #+#    #+#             */
-/*   Updated: 2023/04/17 15:52:56 by micarrel         ###   ########.fr       */
+/*   Updated: 2023/05/04 10:18:14 by micarrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	update(t_game *game, int x, int y)
 {
-	t_image img;
-	
+	t_image	img;
+
 	img.path = "./img/floor.xpm";
 	img.wlx = *game;
 	put_img(game, img, game->player.x, game->player.y);
@@ -48,7 +48,7 @@ void	ft_down(t_game *game)
 	int		i;
 	int		j;
 	t_image	img;
-	
+
 	img.path = "./img/down.xpm";
 	img.wlx = *game;
 	i = game->player.y + 64;
