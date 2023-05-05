@@ -6,7 +6,7 @@
 #    By: micarrel <micarrel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/22 10:00:35 by micarrel          #+#    #+#              #
-#    Updated: 2023/04/05 12:04:57 by micarrel         ###   ########.fr        #
+#    Updated: 2023/05/05 16:00:35 by micarrel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,7 @@ LIBMLX  	= $(LIBMLXDIR)/libmlx_Linux.a
 
 PRINTFDIR	= ./ft_printf
 PRINTF	= $(PRINTFDIR)/libftprintf.a
+
 
 LFLAGS  	= -L$(LIBMLXDIR) -lmlx -L${LIBFTDIR} -lft
 UNAME   	:= $(shell uname)
@@ -51,7 +52,7 @@ $(NAME):	$(OBJ)
 
 clean :
 			@make clean -s -C $(LIBFTDIR)
-			@make clean -s -C $(LIBFTDIR)
+			@make clean -s -C $(PRINTFDIR)
 			rm -rf $(OBJ)
 
 fclean:		clean

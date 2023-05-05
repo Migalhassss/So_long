@@ -18,9 +18,9 @@ void	ft_window_size(t_game *data, char **av)
 
 	fd = open(av[1], O_RDONLY);
 	if (fd < 0)
-		ft_error("Error\n", data);
+		exit(1);
 	if (ft_strnstr(av[1], ".ber", ft_strlen(av[1])) == NULL)
-		ft_error("Error\n", data);
+		exit(1);
 	data->size_x = (ft_line(fd) * 64);
 	data->size_y = (ft_count_line(fd) * 64);
 	if (data->size_x == 0 || data->size_y == 0)
@@ -28,30 +28,16 @@ void	ft_window_size(t_game *data, char **av)
 		ft_printf("Mapa vazio\n");
 		exit(1);
 	}
-	else if (data->size_x == (long unsigned int)data->size_y)
-	{
-		ft_printf("Mapa quadrado\n");
-		exit(1);
-	}
-}
-
-int	window_destroy(t_game *game)
-{
-	mlx_destroy_window(game->mlx, game->window);
-	mlx_destroy_display(game->mlx);
-	destroy_map(game);
-	free(game->mlx);
-	exit(1);
 }
 
 void	flood_fill(int x, int y, int *flag, char **tab)
 {
-	if (tab[y][x] == '1' || tab[y][x] == 'P' || tab[y][x] == 'D')
+	if (tab[y][x] == '1' || tab[y][x] == 'P')
 		return ;
 	else if (tab[y][x] == '0')
 		tab[y][x] = 'P';
 	else if (tab[y][x] == 'C')
-		tab[y][x] = 'D';
+		tab[y][x] = 'P';
 	else if (tab[y][x] == 'E')
 	{
 		(*flag)++;
@@ -63,21 +49,37 @@ void	flood_fill(int x, int y, int *flag, char **tab)
 	flood_fill(x, y - 1, flag, tab);
 }
 
-void	flood_fill_C(int x, int y, int *flag, char **tab)
+int	check_all_collectible(char **temp)
 {
-	if (tab[y][x] == '1' || tab[y][x] == '0' || tab[y][x] == 'E')
-		return ;
-	else if (tab[y][x] == 'P')
-		tab[y][x] = '0';
-	else if (tab[y][x] == 'C' || tab[y][x] == 'D')
+	int	x;
+	int	y;
+
+	y = 0;
+	while (temp[y])
 	{
-		(*flag)++;
-		tab[y][x] = 'C';
+		x = 0;
+		while (temp[y][x])
+		{
+			if (temp[y][x] == 'C')
+				return (0);
+			x++;
+		}
+		y++;
 	}
-	flood_fill(x + 1, y, flag, tab);
-	flood_fill(x - 1, y, flag, tab);
-	flood_fill(x, y + 1, flag, tab);
-	flood_fill(x, y - 1, flag, tab);
+	return (1);
+}
+
+void	flood_free(char **tab)
+{
+	int	i;
+
+	i = 0;
+	while (tab[i])
+	{
+		free(tab[i]);
+		i++;
+	}
+	free(tab);
 }
 
 void	fill_flood(t_game *game)
@@ -86,19 +88,25 @@ void	fill_flood(t_game *game)
 	int		y;
 	int		flag;
 	char	**tab;
+	int		i;
 
 	flag = 0;
 	x = game->player.x;
 	y = game->player.y;
-	tab = game->map;
+	tab = malloc(sizeof(char **) * (game->size_y + 1));
+	i = 0;
+	while (game->map[i])
+	{
+		tab[i] = ft_strdup(game->map[i]);
+		i++;
+	}
+	tab[i] = '\0';
 	flood_fill(x / 64 + 1, y / 64, &flag, tab);
 	flood_fill(x / 64 - 1, y / 64, &flag, tab);
 	flood_fill(x / 64, y / 64 - 1, &flag, tab);
 	flood_fill(x / 64, y / 64 + 1, &flag, tab);
-	flood_fill_C(x / 64 + 1, y / 64, &flag, tab);
-	flood_fill_C(x / 64 - 1, y / 64, &flag, tab);
-	flood_fill_C(x / 64, y / 64 - 1, &flag, tab);
-	flood_fill_C(x / 64, y / 64 + 1, &flag, tab);
-	if (flag == 0 || flag != game->coincheck)
+	i = check_all_collectible(tab);
+	flood_free(tab);
+	if (flag == 0 || !i)
 		ft_error("Exit Error\n", game);
 }

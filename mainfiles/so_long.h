@@ -42,6 +42,8 @@ typedef struct s_game
 	void		*mlx;
 	void		*window;
 	char		**map;
+	int			*coinmap_x;
+	int			*coinmap_y;
 	int			coincheck;
 	int			playercheck;
 	int			exitcheck;
@@ -49,7 +51,6 @@ typedef struct s_game
 	size_t		size_x;
 	int			size_y;
 	t_player	player;
-
 }				t_game;
 
 typedef struct s_image
@@ -80,8 +81,9 @@ void	flood_fill(int x, int y, int *flag, char **tab);
 /*-------------------Gnl.c--------------------*/
 int		ft_line(int fd);
 int		ft_count_line(int fd);
-
+char	*get_next_line(int fd);
 void	*myfree(void *str);
+
 /*--------------------------------------------*/
 
 /*-------------------Img.c--------------------*/
@@ -102,18 +104,18 @@ void	map_create(t_game *game, int i);
 void	floor_create(t_game *game, int i);
 void	create_maplenght(char *area, t_game *game, int i);
 void	create_mapline(t_game *game, char **av);
+int		window_destroy(t_game *game);
 
 /*--------------------------------------------*/
 
 /*-------------------Window.c-----------------*/
 void	ft_window_size(t_game *data, char **av);
-int		window_destroy(t_game *game);
 void	flood_fill(int x, int y, int *flag, char **tab);
 void	flood_fill_C(int x, int y, int *flag, char **tab);
 void	fill_flood(t_game *game);
 
 /*--------------------------------------------*/
-char	*get_next_line(int fd);
+
 /*-------------------Main.c-------------------*/
 void	ft_error_map(char *msg, t_game *game);
 void	ft_error(char *msg, t_game *game);

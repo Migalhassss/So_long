@@ -108,3 +108,12 @@ void	create_mapline(t_game *game, char **av)
 	if (game->error > 0)
 		window_destroy(game);
 }
+
+int	window_destroy(t_game *game)
+{
+	mlx_destroy_window(game->mlx, game->window);
+	mlx_destroy_display(game->mlx);
+	destroy_map(game);
+	free(game->mlx);
+	exit(1);
+}

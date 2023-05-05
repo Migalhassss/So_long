@@ -6,7 +6,7 @@
 /*   By: micarrel <micarrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 13:39:05 by micarrel          #+#    #+#             */
-/*   Updated: 2023/05/04 11:03:52 by micarrel         ###   ########.fr       */
+/*   Updated: 2023/05/05 12:51:24 by micarrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ int	check_move(t_game *game, int i, int j)
 {
 	if (game->map[i][j] == '1')
 		return (1);
-	else if (game->map[i][j] == 'C' || game->map[i][j] == 'D')
+	else if (game->map[i][j] == 'C')
 	{
 		game->player.coin++;
 		game->map[i][j] = '0';
