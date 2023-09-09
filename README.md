@@ -14,9 +14,8 @@ This repository contains the source code and assets for the `So_long` game, alon
 - [Building and Running So_long](#building-and-running-so_long)
 - [Game Controls](#game-controls)
 - [Game Assets](#game-assets)
-- [License](#license)
 - [Acknowledgments](#acknowledgments)
-- [Contributions](#contributions)
+- [Support](#support)
 
 ## Features
 
